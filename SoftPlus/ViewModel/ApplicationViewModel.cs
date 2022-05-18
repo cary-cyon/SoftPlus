@@ -1,4 +1,5 @@
-﻿using SoftPlus.Model;
+﻿using SoftPlus.Command;
+using SoftPlus.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,6 +15,37 @@ namespace SoftPlus.ViewModel
     {
         
         private Product selectedProduct;
+        private RelayCommand addCommand;
+        private RelayCommand removeCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      Product product = new Product() { TypeProduct = false, SubscriptionPeriod = null };
+                      Products.Insert(0, product);
+                      SelectedProduct = product;
+                  }));
+            }
+        }
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ?? (removeCommand = new RelayCommand(
+                obj =>
+                {
+                    Products.Remove(SelectedProduct);
+                },
+                (obj) => 
+                { 
+                    return SelectedProduct != null; 
+                }
+                ));
+            }
+        }
         public ObservableCollection<Product> Products { get; set; }
         public Product SelectedProduct
         {

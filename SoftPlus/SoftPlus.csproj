@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\ClientStatus.cs" />
     <Compile Include="Model\Manager.cs" />
