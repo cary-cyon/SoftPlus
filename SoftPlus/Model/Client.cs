@@ -1,46 +1,18 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftPlus.Model
 {
-    internal class Client : INotifyPropertyChanged
+    internal class Client
     {
-        private string name;
-        private Manager manager;
-        private ClientStatus status;
-        private List<Product> products;
-        public string Name { 
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }        
-        }
-        public Manager Manager
-        {
-            get { return manager; }
-            set { manager = value; OnPropertyChanged("Manager"); }
-        }
-        public ClientStatus Status
-        {
-            get { return status; }
-            set { status = value; OnPropertyChanged("Status"); }
-        }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int ManagerId { get; set; }
+        public Manager Manager { get; set; }
+        public int StatusId { get; set; }
+        public ClientStatus Status { get; set; }
+        public List<ClientProduct> ClientProducts { get; set; } 
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
     }
 
 }

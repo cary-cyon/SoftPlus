@@ -42,10 +42,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Command="{Binding AddCommand}" >+</Button>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <Button Command="{Binding RemoveCommand}" >-</Button>
+            <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedProduct}" >+</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedProduct}">
             <TextBlock Text="Выбранный элемент"  />
