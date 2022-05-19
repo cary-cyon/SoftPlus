@@ -17,9 +17,11 @@ namespace SoftPlus.ViewModel
         
         private Product selectedProduct;
         private RelayCommand addCommand;
+        private RelayCommand removeCommand;
+        private RelayCommand editCommand;
         private SoftPlusContext _dbContext;
         private List<Product> products;
-
+        private static ApplicationViewModel _instance;
 
 
 
@@ -31,7 +33,20 @@ namespace SoftPlus.ViewModel
                   (addCommand = new RelayCommand(obj => DataManager.AddDataProduct(obj)));
             }
         }
-
+        public RelayCommand RemoveCommand
+        {
+            get
+            {
+                return removeCommand ?? (removeCommand = new RelayCommand(obj => DataManager.RemoveDataProduct(obj)));
+            }
+        }
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ?? (editCommand = new RelayCommand(obj => DataManager.EditDataProduct(obj))); 
+            }
+        }
         public List<Product> Products
         {
             get
@@ -48,12 +63,13 @@ namespace SoftPlus.ViewModel
         public Product SelectedProduct
         {
             get { return selectedProduct; }
-            set { 
-                selectedProduct = value; 
+            set
+            {
+                selectedProduct = value;
                 OnPropertyChanged("SelectedProduct");
             }
         }
-        public ApplicationViewModel()
+        private ApplicationViewModel()
         {
             _dbContext =new SoftPlusContext();
             Products = _dbContext.Products.ToList();
@@ -63,6 +79,16 @@ namespace SoftPlus.ViewModel
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+        public static ApplicationViewModel getInstance()
+        {
+            if (_instance == null)
+                _instance = new ApplicationViewModel();
+            return _instance;
+        }
+        public void Update()
+        {
+            Products = _dbContext.Products.ToList();
         }
     }
 }

@@ -43,17 +43,19 @@
         </ListBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedProduct}" >+</Button>
+            <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedProduct}" >-</Button>
+            <Button Command="{Binding EditCommand}" CommandParameter="{Binding SelectedProduct}" >edit</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedProduct}">
             <TextBlock Text="Выбранный элемент"  />
             <TextBlock Text="Название" />
-            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Name}" />
             <TextBlock Text="Тип" />
-            <TextBox Text="{Binding TypeProduct, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding TypeProduct}" />
             <TextBlock Text="Цена" />
-            <TextBox Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Price}" />
             <TextBlock Text="Период подписки" />
-            <TextBox Text="{Binding SubscriptionPeriod, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding SubscriptionPeriod}" />
         </StackPanel>
     </Grid>
 </Window>

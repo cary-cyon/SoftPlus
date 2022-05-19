@@ -14,6 +14,11 @@ namespace SoftPlus.Model
 
         public string SubscriptionPeriod { get; set; }
         public List<ClientProduct> ClientProducts { get; set; }
+        public Product()
+        {
+            TypeProduct = "Лицензия";
+            SubscriptionPeriod = "Нет";
+        }
 
     }
 }

@@ -25,7 +25,7 @@ namespace SoftPlus
         {
             InitializeComponent();
             
-            DataContext = new ApplicationViewModel();
+            DataContext = ApplicationViewModel.getInstance();
         }
     }
 }
