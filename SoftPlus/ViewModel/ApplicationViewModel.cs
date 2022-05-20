@@ -19,13 +19,18 @@ namespace SoftPlus.ViewModel
     {
         
         private Product selectedProduct;
+        private Manager selectedManager;
+        private Client selectedClient;
+        
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
         private RelayCommand editCommand;
-        private RelayCommand selectProduct;
         private SoftPlusContext _dbContext;
         private List<Product> products;
         private List<Client> clients;
+        private List<Manager> managers;
+        private List<ClientStatus> clientStatuses;
+
         private static ApplicationViewModel _instance;
 
 
@@ -51,13 +56,6 @@ namespace SoftPlus.ViewModel
             get
             {
                 return editCommand ?? (editCommand = new RelayCommand(obj => DataManager.EditDataProduct(obj))); 
-            }
-        }
-        public RelayCommand SelectProductCommand
-        {
-            get
-            {
-                return selectProduct ?? (selectProduct = new RelayCommand(obj => DataManager.SelectValue(obj)));
             }
         }
         public List<Product> Products
@@ -87,11 +85,31 @@ namespace SoftPlus.ViewModel
                 OnPropertyChanged("SelectedProduct");
             }
         }
+        public Manager SelectedManager
+        {
+            get { return selectedManager; }
+            set { selectedManager = value; OnPropertyChanged("SelectedManager"); }
+        }
+        public Client SelectedClient
+        {
+            get { return selectedClient; }
+            set { selectedClient = value; OnPropertyChanged("SelectedClient"); }
+        }
+        public List<ClientStatus> ClientStatuses
+        {
+            get { return clientStatuses; }
+            set { clientStatuses = value; OnPropertyChanged("ClientStatuses"); }
+        }
+        public List<Manager> Managers
+        {
+            get { return managers; }
+            set { managers = value; OnPropertyChanged("Managers"); }
+        }
         private ApplicationViewModel()
         {
             _dbContext =new SoftPlusContext();
             Products = _dbContext.Products.Include(p => p.ClientProducts).ThenInclude(cp => cp.Client).ToList();
-            Clients = _dbContext.Clients.ToList();
+            Clients = _dbContext.Clients.Include(c => c.Status).Include(c => c.Manager).ToList();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

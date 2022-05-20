@@ -84,19 +84,34 @@
                     <RowDefinition Height="0.2*" />
                 </Grid.RowDefinitions>
 
-                <ListBox Grid.Column="0" ItemsSource="{Binding Clients}">
+                <ListBox Grid.Column="0" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="5">
-                                <TextBlock Text="{Binding Id}"/>
+                                <TextBlock Text="{Binding Path = Name }"/>
+                                <TextBlock Text="{Binding Path = Status.Status}"/>
+                                <TextBlock Text="{Binding Path = Manager.Name}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button >+</Button>
+                    <Button >-</Button>
+                    <Button >edit</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Выбранный элемент"  />
+                    <TextBlock Text="Имя"/>
+                    <TextBox Text="{Binding SelectedClient.Name}"/>
+                    <TextBlock Text="Статус"/>
+                    <TextBox Text="{Binding SelectedClient.Status.Status}"/>
+                    <TextBlock Text="Менеджер"/>
+                    <TextBox Text="{Binding SelectedClient.Manager.Name}"/>
+
+                </StackPanel>
             </Grid>
-
-
         </TabItem>
     </TabControl>
 
