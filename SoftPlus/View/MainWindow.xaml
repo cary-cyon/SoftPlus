@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SoftPlus" xmlns:viewmodel="clr-namespace:SoftPlus.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ApplicationViewModel}"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
@@ -18,44 +19,85 @@
             <Setter Property="Margin" Value="5" />
         </Style>
     </Window.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.8*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="0.2*" />
-        </Grid.RowDefinitions>
+    <TabControl>
+        <TabItem Header="Продукты">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
 
-        <ListBox Grid.Column="0" ItemsSource="{Binding Products}"
-                 SelectedItem="{Binding SelectedProduct}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=Name}" />
-                        <TextBlock Text="{Binding Path=TypeProduct}" />
-                        <TextBlock Text="{Binding Path=Price}" />
-                        <TextBlock Text="{Binding Path=SubscriptionPeriod}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedProduct}" >+</Button>
-            <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedProduct}" >-</Button>
-            <Button Command="{Binding EditCommand}" CommandParameter="{Binding SelectedProduct}" >edit</Button>
-        </StackPanel>
-        <StackPanel Grid.Column="1" DataContext="{Binding SelectedProduct}">
-            <TextBlock Text="Выбранный элемент"  />
-            <TextBlock Text="Название" />
-            <TextBox Text="{Binding Name}" />
-            <TextBlock Text="Тип" />
-            <TextBox Text="{Binding TypeProduct}" />
-            <TextBlock Text="Цена" />
-            <TextBox Text="{Binding Price}" />
-            <TextBlock Text="Период подписки" />
-            <TextBox Text="{Binding SubscriptionPeriod}" />
-        </StackPanel>
-    </Grid>
+                <ListBox Grid.Column="0" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock FontSize="18" Text="{Binding Path=Name}" />
+                                <TextBlock Text="{Binding Path=TypeProduct}" />
+                                <TextBlock Text="{Binding Path=Price}" />
+                                <TextBlock Text="{Binding Path=SubscriptionPeriod}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedProduct}" >+</Button>
+                    <Button Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedProduct}" >-</Button>
+                    <Button Command="{Binding EditCommand}" CommandParameter="{Binding SelectedProduct}" >edit</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Выбранный элемент"  />
+                    <TextBlock Text="Название" />
+                    <TextBox Text="{Binding SelectedProduct.Name}" />
+                    <TextBlock Text="Тип" />
+                    <ComboBox ItemsSource="{Binding ProductTypeComboboxList}" SelectedItem="{Binding SelectedProduct.TypeProduct}"/>
+                    <TextBlock Text="Цена" />
+                    <TextBox Text="{Binding SelectedProduct.Price}" />
+                    <TextBlock Text="Период подписки" />
+                    <ComboBox ItemsSource="{Binding SubscriptionPeriodComboboxList}" SelectedItem="{Binding SelectedProduct.SubscriptionPeriod}"/>
+                    <TextBlock Text="Клиенты" />
+                    <ListBox ItemsSource="{Binding SelectedProduct.ClientProducts}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock Text="{Binding Path = Client.Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Клиенты">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Column="0" ItemsSource="{Binding Clients}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding Id}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+
+        </TabItem>
+    </TabControl>
+
 </Window>

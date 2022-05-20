@@ -67,5 +67,12 @@ namespace SoftPlus.Data
                 return "Error";
             }
         }
+
+        public static string SelectValue(object obj)
+        {
+            var app = ApplicationViewModel.getInstance();
+            app.SelectedProduct = obj as Product;
+            return "Ok";
+        }
     }
 }
