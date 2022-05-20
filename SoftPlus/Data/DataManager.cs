@@ -1,4 +1,5 @@
-﻿using SoftPlus.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using SoftPlus.Model;
 using SoftPlus.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,30 @@ namespace SoftPlus.Data
     {
         public static string AddDataProduct(object obj)
         {
+            
             try
             {
                 var db = new SoftPlusContext();
-
                 var p = new Product();
                 db.Products.Add(p);
                 db.SaveChanges();
+                ApplicationViewModel app = ApplicationViewModel.getInstance();
+                app.Update();
+                return "Ok";
+            }
+            catch
+            {
+                return "Error";
+            }
+
+        }
+        public static string AddData<ModelType>(object obj) where ModelType : new() 
+        {
+            try
+            {
+                var db = new SoftPlusContext();
+                var p = new ModelType();
+                AddToDbSet(typeof(ModelType), db);
                 ApplicationViewModel app = ApplicationViewModel.getInstance();
                 app.Update();
                 return "Ok";
@@ -68,11 +86,21 @@ namespace SoftPlus.Data
             }
         }
 
-        public static string SelectValue(object obj)
+        private static void AddToDbSet(Type type, SoftPlusContext context)
         {
-            var app = ApplicationViewModel.getInstance();
-            app.SelectedProduct = obj as Product;
-            return "Ok";
+            if(type == typeof(Client))
+            {
+                context.Clients.Add(new Client());
+            }
+            if(type == typeof(Product))
+            {
+                context.Products.Add(new Product());
+            }
+            if(type == typeof(Manager))
+            {
+                context.Managers.Add(new Manager());
+            }
+            context.SaveChanges();
         }
     }
 }

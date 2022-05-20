@@ -25,6 +25,7 @@ namespace SoftPlus.ViewModel
         private RelayCommand addCommand;
         private RelayCommand removeCommand;
         private RelayCommand editCommand;
+        private RelayCommand addClientCommand;
         private SoftPlusContext _dbContext;
         private List<Product> products;
         private List<Client> clients;
@@ -41,7 +42,7 @@ namespace SoftPlus.ViewModel
             get
             {
                 return addCommand ??
-                  (addCommand = new RelayCommand(obj => DataManager.AddDataProduct(obj)));
+                  (addCommand = new RelayCommand(obj => DataManager.AddData<Product>(obj)));
             }
         }
         public RelayCommand RemoveCommand
@@ -56,6 +57,13 @@ namespace SoftPlus.ViewModel
             get
             {
                 return editCommand ?? (editCommand = new RelayCommand(obj => DataManager.EditDataProduct(obj))); 
+            }
+        }
+        public RelayCommand AddClientCommand
+        {
+            get 
+            { 
+                return addClientCommand ?? (addClientCommand = new RelayCommand(obj => DataManager.AddData<Client>(obj)));
             }
         }
         public List<Product> Products
@@ -126,6 +134,8 @@ namespace SoftPlus.ViewModel
         public void Update()
         {
             Products = _dbContext.Products.ToList();
+            Clients = _dbContext.Clients.ToList();
+            Managers = _dbContext.Managers.ToList();
         }
     }
 }

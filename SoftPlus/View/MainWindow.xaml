@@ -97,7 +97,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Button >+</Button>
+                    <Button Command="{Binding AddClientCommand}" >+</Button>
                     <Button >-</Button>
                     <Button >edit</Button>
                 </StackPanel>

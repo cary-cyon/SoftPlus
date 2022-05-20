@@ -11,7 +11,13 @@ namespace SoftPlus.Model
         public Manager Manager { get; set; }
         public int StatusId { get; set; }
         public ClientStatus Status { get; set; }
-        public List<ClientProduct> ClientProducts { get; set; } 
+        public List<ClientProduct> ClientProducts { get; set; }
+        public Client()
+        {
+            Name = "Новый Клиент";
+            ManagerId = 2;
+            StatusId = 2;
+        }
 
     }
 

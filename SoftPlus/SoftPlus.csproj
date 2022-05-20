@@ -167,6 +167,10 @@
     <Compile Include="Migrations\20220519083317_Initial.designer.cs">
       <DependentUpon>20220519083317_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220520170837_NullAbleManager.cs" />
+    <Compile Include="Migrations\20220520170837_NullAbleManager.designer.cs">
+      <DependentUpon>20220520170837_NullAbleManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\SoftPlusContextModelSnapshot.cs" />
     <Compile Include="Model\Client.cs" />
     <Compile Include="Model\ClientProduct.cs" />
