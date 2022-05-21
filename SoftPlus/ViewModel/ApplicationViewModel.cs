@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SoftPlus.Command;
 using SoftPlus.Data;
+using SoftPlus.Interfaces;
 using SoftPlus.Model;
+using SoftPlus.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -38,6 +40,7 @@ namespace SoftPlus.ViewModel
 
         private static ApplicationViewModel _instance;
 
+        IView view;
 
         public List<string> ProductTypeComboboxList { get; set; } = new List<string> { "Подписка", "Лицензия" };
         public List<string> SubscriptionPeriodComboboxList { get; set; } = new List<string> { "нет", "Месяц", "Квартал", "Год" };
@@ -47,7 +50,7 @@ namespace SoftPlus.ViewModel
             get
             {
                 return addCommand ??
-                  (addCommand = new RelayCommand(obj => DataManager.AddData<Product>(obj)));
+                  (addCommand = new RelayCommand(obj => OpenWindowProduct()));
             }
         }
         public RelayCommand RemoveCommand
@@ -124,11 +127,7 @@ namespace SoftPlus.ViewModel
 
             } 
         }
-        public List<Client> Clients
-        {
-            get { return clients; }
-            set { clients = value; OnPropertyChanged("Clients"); }
-        }
+        #region Select
         public Product SelectedProduct
         {
             get { return selectedProduct; }
@@ -148,6 +147,13 @@ namespace SoftPlus.ViewModel
             get { return selectedClient; }
             set { selectedClient = value; OnPropertyChanged("SelectedClient"); }
         }
+        #endregion
+        #region Lists
+        public List<Client> Clients
+        {
+            get { return clients; }
+            set { clients = value; OnPropertyChanged("Clients"); }
+        }
         public List<ClientStatus> ClientStatuses
         {
             get { return clientStatuses; }
@@ -158,11 +164,17 @@ namespace SoftPlus.ViewModel
             get { return managers; }
             set { managers = value; OnPropertyChanged("Managers"); }
         }
-        private ApplicationViewModel()
+        #endregion
+        private ApplicationViewModel(IView view)
         {
             _dbContext =new SoftPlusContext();
+            this.view = view;
             Update();
             
+        }
+        public void OpenWindowProduct()
+        {
+            view.Open();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -173,7 +185,7 @@ namespace SoftPlus.ViewModel
         public static ApplicationViewModel getInstance()
         {
             if (_instance == null)
-                _instance = new ApplicationViewModel();
+                _instance = new ApplicationViewModel(new ProductAdd());
             return _instance;
         }
         public void Update()

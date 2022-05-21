@@ -12,13 +12,12 @@ namespace SoftPlus.Data
     internal class DataManager
     {
 
-        public static string AddData<ModelType>(object obj) where ModelType : new() 
+        public static string AddData<ModelType>(object obj) where ModelType : class
         {
             try
             {
                 var db = new SoftPlusContext();
-                var p = new ModelType();
-                AddToDbSet(typeof(ModelType), db);
+                AddToDbSet(typeof(ModelType), db, obj);
                 ApplicationViewModel app = ApplicationViewModel.getInstance();
                 app.Update();
                 return "Ok";
@@ -70,19 +69,19 @@ namespace SoftPlus.Data
             return obj != null ? true : false;
         }
 
-        private static void AddToDbSet(Type type, SoftPlusContext context)
+        private static void AddToDbSet(Type type, SoftPlusContext context, object obj)
         {
             if(type == typeof(Client))
             {
-                context.Clients.Add(new Client());
+                context.Clients.Add(obj as Client);
             }
             if(type == typeof(Product))
             {
-                context.Products.Add(new Product());
+                context.Products.Add(obj as Product);
             }
             if(type == typeof(Manager))
             {
-                context.Managers.Add(new Manager());
+                context.Managers.Add(obj as Manager);
             }
             context.SaveChanges();
         }

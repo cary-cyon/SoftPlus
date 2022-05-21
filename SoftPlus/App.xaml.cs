@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Prism.Ioc;
+using Prism.Unity;
+using SoftPlus.Interfaces;
+using SoftPlus.View;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +17,6 @@ namespace SoftPlus
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

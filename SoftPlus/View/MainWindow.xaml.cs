@@ -1,4 +1,5 @@
 ﻿using SoftPlus.ViewModel;
+using System.ComponentModel;
 using System.Windows;
 
 
@@ -14,6 +15,10 @@ namespace SoftPlus
             InitializeComponent();
             
             DataContext = ApplicationViewModel.getInstance();
+        }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
