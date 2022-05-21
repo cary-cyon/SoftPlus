@@ -26,6 +26,10 @@ namespace SoftPlus.ViewModel
         private RelayCommand removeCommand;
         private RelayCommand editCommand;
         private RelayCommand addClientCommand;
+        private RelayCommand removeClientCommmand;
+        private RelayCommand addManagerCommand;
+        private RelayCommand removeMangerCommmand;
+
         private SoftPlusContext _dbContext;
         private List<Product> products;
         private List<Client> clients;
@@ -37,6 +41,7 @@ namespace SoftPlus.ViewModel
 
         public List<string> ProductTypeComboboxList { get; set; } = new List<string> { "Подписка", "Лицензия" };
         public List<string> SubscriptionPeriodComboboxList { get; set; } = new List<string> { "нет", "Месяц", "Квартал", "Год" };
+        #region Commands
         public RelayCommand AddCommand
         {
             get
@@ -49,7 +54,11 @@ namespace SoftPlus.ViewModel
         {
             get
             {
-                return removeCommand ?? (removeCommand = new RelayCommand(obj => DataManager.RemoveDataProduct(obj)));
+                return removeCommand ?? (removeCommand = 
+                    new RelayCommand(
+                        obj => DataManager.RemoveData<Product>(obj),
+                        obj => DataManager.CanRemoveData(obj))
+                    );
             }
         }
         public RelayCommand EditCommand
@@ -63,9 +72,45 @@ namespace SoftPlus.ViewModel
         {
             get 
             { 
-                return addClientCommand ?? (addClientCommand = new RelayCommand(obj => DataManager.AddData<Client>(obj)));
+                return addClientCommand ?? (addClientCommand = 
+                    new RelayCommand(
+                        obj => DataManager.AddData<Client>(obj))
+                    );
             }
         }
+        public RelayCommand RemoveClientCommаnd
+        {
+            get
+            {
+                return removeClientCommmand ?? (removeClientCommmand = 
+                    new RelayCommand(
+                        obj => DataManager.RemoveData<Client>(obj),
+                        obj => DataManager.CanRemoveData(obj))
+                    );
+            }
+        }
+        public RelayCommand AddManagerCommand
+        {
+            get
+            {
+                return addManagerCommand ?? (addManagerCommand = 
+                    new RelayCommand(
+                        obj => DataManager.AddData<Manager>(obj))
+                    );
+            }
+        }
+        public RelayCommand RemoveManagerCommand
+        {
+            get
+            {
+                return removeMangerCommmand ?? (removeMangerCommmand = 
+                    new RelayCommand(
+                        obj => DataManager.RemoveData<Manager>(obj),
+                        obj => DataManager.CanRemoveData(obj))
+                    );
+            }
+        }
+        #endregion
         public List<Product> Products
         {
             get
@@ -116,8 +161,8 @@ namespace SoftPlus.ViewModel
         private ApplicationViewModel()
         {
             _dbContext =new SoftPlusContext();
-            Products = _dbContext.Products.Include(p => p.ClientProducts).ThenInclude(cp => cp.Client).ToList();
-            Clients = _dbContext.Clients.Include(c => c.Status).Include(c => c.Manager).ToList();
+            Update();
+            
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -133,8 +178,8 @@ namespace SoftPlus.ViewModel
         }
         public void Update()
         {
-            Products = _dbContext.Products.ToList();
-            Clients = _dbContext.Clients.ToList();
+            Products = _dbContext.Products.Include(p => p.ClientProducts).ThenInclude(cp => cp.Client).ToList();
+            Clients = _dbContext.Clients.Include(c => c.Status).Include(c => c.Manager).ToList();
             Managers = _dbContext.Managers.ToList();
         }
     }

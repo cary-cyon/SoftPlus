@@ -11,25 +11,7 @@ namespace SoftPlus.Data
 {
     internal class DataManager
     {
-        public static string AddDataProduct(object obj)
-        {
-            
-            try
-            {
-                var db = new SoftPlusContext();
-                var p = new Product();
-                db.Products.Add(p);
-                db.SaveChanges();
-                ApplicationViewModel app = ApplicationViewModel.getInstance();
-                app.Update();
-                return "Ok";
-            }
-            catch
-            {
-                return "Error";
-            }
 
-        }
         public static string AddData<ModelType>(object obj) where ModelType : new() 
         {
             try
@@ -47,19 +29,17 @@ namespace SoftPlus.Data
             }
 
         }
-        public static string RemoveDataProduct(object obj)
+        public static string RemoveData<ModelType>(object obj)
         {
             try
             {
                 var db = new SoftPlusContext();
-                var p = obj as Product;
-                db.Products.Remove(p);
-                db.SaveChanges ();
+                RemoveFromDbSet(typeof(ModelType), db, obj);
                 var app = ApplicationViewModel.getInstance();
-                app.Update ();
+                app.Update();
                 return "Ок";
             }
-            catch 
+            catch
             {
                 return "Error";
             }
@@ -85,6 +65,10 @@ namespace SoftPlus.Data
                 return "Error";
             }
         }
+        public static bool CanRemoveData(object obj)
+        {
+            return obj != null ? true : false;
+        }
 
         private static void AddToDbSet(Type type, SoftPlusContext context)
         {
@@ -102,5 +86,26 @@ namespace SoftPlus.Data
             }
             context.SaveChanges();
         }
+        private static void RemoveFromDbSet(Type type, SoftPlusContext context, object obj)
+        {
+            if (type == typeof(Client))
+            {
+                Client cl = obj as Client;
+                context.Clients.Remove(cl);
+            }
+            if (type == typeof(Product))
+            {
+                Product cl = obj as Product;
+                context.Products.Remove(cl);
+            }
+            if (type == typeof(Manager))
+            {
+                Manager cl = obj as Manager;
+                context.Managers.Remove(cl);
+            }
+            context.SaveChanges();
+
+        }
+
     }
 }

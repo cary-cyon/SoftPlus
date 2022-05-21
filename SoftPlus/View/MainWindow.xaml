@@ -98,7 +98,7 @@
                 </ListBox>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Button Command="{Binding AddClientCommand}" >+</Button>
-                    <Button >-</Button>
+                    <Button Command="{Binding RemoveClientCommаnd}" CommandParameter="{Binding SelectedClient}">-</Button>
                     <Button >edit</Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
@@ -109,6 +109,40 @@
                     <TextBox Text="{Binding SelectedClient.Status.Status}"/>
                     <TextBlock Text="Менеджер"/>
                     <TextBox Text="{Binding SelectedClient.Manager.Name}"/>
+
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Менеджеры">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.8*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.2*" />
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Column="0" ItemsSource="{Binding Managers}" SelectedItem="{Binding SelectedManager}">
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock Text="{Binding Path = Name }"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Command="{Binding AddManagerCommand}" >+</Button>
+                    <Button Command="{Binding RemoveManagerCommand}" CommandParameter="{Binding SelectedManager}">-</Button>
+                    <Button >edit</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Выбранный элемент"  />
+                    <TextBlock Text="Имя"/>
+                    <TextBox Text="{Binding SelectedManager.Name}"/>
 
                 </StackPanel>
             </Grid>
