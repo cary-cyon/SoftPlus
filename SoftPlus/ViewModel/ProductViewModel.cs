@@ -28,8 +28,16 @@ namespace SoftPlus.ViewModel
         }
         public RelayCommand AddCommand
         {
-            get { return addCommand ?? (addCommand = new RelayCommand(obj => DataManager.AddData<Product>(obj))); } 
+            get 
+            { 
+                return addCommand ?? (addCommand =
+                    new RelayCommand(
+                        obj => DataManager.AddData<Product>(obj),
+                        obj => Validator.ValidateProduct(obj))
+                    ); 
+            } 
         }
+
         public Product SelectedProduct { get { return _product; } set { _product = value; OnPropertyChanged("SelectedProduct"); } }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
