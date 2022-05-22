@@ -12,6 +12,8 @@ namespace SoftPlus.Data
             var p = obj as Product;
             if (p.TypeProduct == "Лицензия" && p.SubscriptionPeriod != "нет")
                 return false;
+            if (p.TypeProduct == "Подписка" && p.SubscriptionPeriod == "нет")
+                return false;
             return true;
         }
     }

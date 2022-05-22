@@ -9,6 +9,14 @@ namespace SoftPlus.Model
         public int Id { get; set; }
         public string Status { get; set; }
         public  List<Client> Clients { get; set; }
+        public ClientStatus()
+        {
+            Status = "Обычный";
+        }
+        public override string ToString()
+        {
+            return Status;
+        }
 
     }
 }

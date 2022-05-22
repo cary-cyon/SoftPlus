@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SoftPlus.Model
 {
@@ -17,6 +16,8 @@ namespace SoftPlus.Model
             Name = "Новый Клиент";
             ManagerId = 2;
             StatusId = 2;
+            Status = new ClientStatus();
+            
         }
 
     }

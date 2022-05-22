@@ -29,7 +29,7 @@ namespace SoftPlus.Model
         public Product()
         {
             TypeProduct = "Лицензия";
-            SubscriptionPeriod = "Нет";
+            SubscriptionPeriod = "нет";
         }
 
     }

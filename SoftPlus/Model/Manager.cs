@@ -13,6 +13,10 @@ namespace SoftPlus.Model
         {
             Name = "Олег";
         }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
 }

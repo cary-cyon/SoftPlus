@@ -86,7 +86,12 @@ namespace SoftPlus.Data
         {
             if(type == typeof(Client))
             {
-                context.Clients.Add(obj as Client);
+                var c = obj as Client;
+                if (c.Status.Status == "Ключевой")
+                    c.StatusId = 1;
+                c.ManagerId = c.Manager.Id;
+                c.Manager = null;
+                context.Clients.Add(c);
             }
             if(type == typeof(Product))
             {

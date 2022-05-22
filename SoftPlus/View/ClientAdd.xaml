@@ -12,9 +12,11 @@
             <TextBlock Text="Имя"/>
             <TextBox Text="{Binding SelectedClient.Name}"/>
             <TextBlock Text="Статус"/>
-            <TextBox Text="{Binding SelectedClient.Status.Status}"/>
+            <ComboBox ItemsSource="{Binding ClientStatusesComboBoxList}" SelectedItem="{Binding SelectedClient.Status.Status}"/>
             <TextBlock Text="Менеджер"/>
-            <TextBox Text="{Binding SelectedClient.Manager.Name}"/>
+            <ComboBox ItemsSource="{Binding ManagersComboboxList}" SelectedItem="{Binding SelectedClient.Manager}"/>
+            
+            
             <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedClient}">+</Button>
 
         </StackPanel>

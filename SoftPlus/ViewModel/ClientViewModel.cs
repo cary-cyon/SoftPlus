@@ -15,6 +15,9 @@ namespace SoftPlus.ViewModel
     {
         private Client client;
         private RelayCommand addCommand;
+
+        public List<string> ClientStatusesComboBoxList { get; set; } = new List<string>() { "Ключевой", "Обычный" };
+        public List<Manager> ManagersComboboxList { get; set; }
         public RelayCommand AddCommand
         {
             get 
@@ -33,6 +36,8 @@ namespace SoftPlus.ViewModel
         public ClientViewModel()
         {
             SelectedClient = new Client();
+            var context = new SoftPlusContext();
+            ManagersComboboxList = context.Managers.ToList();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
