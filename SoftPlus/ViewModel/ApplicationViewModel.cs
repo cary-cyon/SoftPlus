@@ -40,8 +40,6 @@ namespace SoftPlus.ViewModel
 
         private static ApplicationViewModel _instance;
 
-        IView view;
-
         public List<string> ProductTypeComboboxList { get; set; } = new List<string> { "Подписка", "Лицензия" };
         public List<string> SubscriptionPeriodComboboxList { get; set; } = new List<string> { "нет", "Месяц", "Квартал", "Год" };
         #region Commands
@@ -50,7 +48,7 @@ namespace SoftPlus.ViewModel
             get
             {
                 return addCommand ??
-                  (addCommand = new RelayCommand(obj => OpenWindowProduct()));
+                  (addCommand = new RelayCommand(obj => OpenWindowProduct(new ProductAdd())));
             }
         }
         public RelayCommand RemoveCommand
@@ -68,16 +66,19 @@ namespace SoftPlus.ViewModel
         {
             get
             {
-                return editCommand ?? (editCommand = new RelayCommand(obj => DataManager.EditDataProduct(obj))); 
+                return editCommand ?? (editCommand = 
+                    new RelayCommand(
+                        obj => DataManager.EditData<Product>(obj),
+                        obj => DataManager.CanRemoveData(obj))
+                    ); 
             }
         }
         public RelayCommand AddClientCommand
         {
             get 
             { 
-                return addClientCommand ?? (addClientCommand = 
-                    new RelayCommand(
-                        obj => DataManager.AddData<Client>(obj))
+                return addClientCommand ?? (addClientCommand =
+                    new RelayCommand(obj => OpenWindowProduct(new ClientAdd()))
                     );
             }
         }
@@ -96,10 +97,8 @@ namespace SoftPlus.ViewModel
         {
             get
             {
-                return addManagerCommand ?? (addManagerCommand = 
-                    new RelayCommand(
-                        obj => DataManager.AddData<Manager>(obj))
-                    );
+                return addManagerCommand ?? (addManagerCommand =
+                    new RelayCommand(obj => OpenWindowProduct(new ManagerAdd())));
             }
         }
         public RelayCommand RemoveManagerCommand
@@ -165,14 +164,14 @@ namespace SoftPlus.ViewModel
             set { managers = value; OnPropertyChanged("Managers"); }
         }
         #endregion
-        private ApplicationViewModel(IView view)
+        private ApplicationViewModel()
         {
             _dbContext =new SoftPlusContext();
-            this.view = view;
+
             Update();
             
         }
-        public void OpenWindowProduct()
+        public void OpenWindowProduct(IView view)
         {
             view.Open();
         }
@@ -185,14 +184,14 @@ namespace SoftPlus.ViewModel
         public static ApplicationViewModel getInstance()
         {
             if (_instance == null)
-                _instance = new ApplicationViewModel(new ProductAdd());
+                _instance = new ApplicationViewModel();
             return _instance;
         }
         public void Update()
         {
             Products = _dbContext.Products.Include(p => p.ClientProducts).ThenInclude(cp => cp.Client).ToList();
             Clients = _dbContext.Clients.Include(c => c.Status).Include(c => c.Manager).ToList();
-            Managers = _dbContext.Managers.ToList();
+            Managers = _dbContext.Managers.Include(m => m.Clients).ToList();
         }
     }
 }

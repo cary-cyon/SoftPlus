@@ -64,6 +64,19 @@ namespace SoftPlus.Data
                 return "Error";
             }
         }
+        public static string EditData<ModelType>(object obj) where ModelType : class
+        {
+            try
+            {
+                var db = new SoftPlusContext();
+                EditInDataSet(typeof(ModelType), db, obj);
+                return "Ok";
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
         public static bool CanRemoveData(object obj)
         {
             return obj != null ? true : false;
@@ -104,6 +117,35 @@ namespace SoftPlus.Data
             }
             context.SaveChanges();
 
+        }
+        private static void EditInDataSet(Type type, SoftPlusContext context, object obj)
+        {
+            if(type == typeof(Client))
+            {
+                var c = obj as Client;
+                var new_c = context.Clients.FirstOrDefault(c1 => c1.Id == c.Id);
+                new_c.StatusId = c.StatusId;
+                new_c.Name = c.Name;
+                new_c.ManagerId = c.ManagerId;
+                
+            }
+            if (type == typeof(Product))
+            {
+                var p = obj as Product;
+                var new_p = context.Products.FirstOrDefault(p1 => p1.Id == p.Id);
+                new_p.Name = p.Name;
+                new_p.SubscriptionPeriod = p.SubscriptionPeriod;
+                new_p.TypeProduct = p.TypeProduct;
+                new_p.Price = p.Price;
+                
+            }
+            if(type == typeof(Manager))
+            {
+                var m = obj as Manager;
+                var new_m = context.Managers.FirstOrDefault(m1 => m1.Id == m.Id);
+                new_m.Name= m.Name;
+            }
+            context.SaveChanges();
         }
 
     }

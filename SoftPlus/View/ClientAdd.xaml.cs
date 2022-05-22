@@ -1,22 +1,20 @@
-﻿using System.ComponentModel;
+﻿using SoftPlus.Interfaces;
+using System.ComponentModel;
 using System.Windows;
-using SoftPlus.Interfaces;
 using SoftPlus.ViewModel;
 
 namespace SoftPlus.View
 {
     /// <summary>
-    /// Логика взаимодействия для ProductAdd.xaml
+    /// Логика взаимодействия для ClientAdd.xaml
     /// </summary>
-    public partial class ProductAdd : Window, IView
+    public partial class ClientAdd : Window, IView
     {
-        public ProductAdd()
+        public ClientAdd()
         {
             InitializeComponent();
-
-            DataContext =new ProductViewModel();
+            DataContext = new ClientViewModel();
         }
-
         public bool? Open()
         {
             return this.ShowDialog();
@@ -25,7 +23,6 @@ namespace SoftPlus.View
         {
             this.Visibility = Visibility.Collapsed;
             e.Cancel = true;
-            
         }
     }
 }

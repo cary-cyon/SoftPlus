@@ -1,6 +1,4 @@
-﻿using Prism.Ioc;
-using Prism.Unity;
-using SoftPlus.Interfaces;
+﻿using SoftPlus.Interfaces;
 using SoftPlus.View;
 using System;
 using System.Collections.Generic;
