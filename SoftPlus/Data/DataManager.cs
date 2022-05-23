@@ -133,6 +133,7 @@ namespace SoftPlus.Data
                 new_c.StatusId = c.StatusId;
                 new_c.Name = c.Name;
                 new_c.ManagerId = c.ManagerId;
+                new_c.Manager = c.Manager;
                 
             }
             if (type == typeof(Product))

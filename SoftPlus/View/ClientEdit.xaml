@@ -1,0 +1,22 @@
+﻿<Window x:Class="SoftPlus.View.ClientEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoftPlus.View" xmlns:viewmodel="clr-namespace:SoftPlus.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ClientViewModel}"
+        mc:Ignorable="d"
+        Title="ClientEdit" Height="450" Width="800">
+    <Grid>
+        <StackPanel Grid.Column="1" >
+            <TextBlock Text="Добавляемый элемент"  />
+            <TextBlock Text="Имя"/>
+            <TextBox Text="{Binding SelectedClient.Name}"/>
+            <TextBlock Text="Статус"/>
+            <ComboBox ItemsSource="{Binding ClientStatusesComboBoxList}" SelectedItem="{Binding SelectedClient.Status.Status}"/>
+            <TextBlock Text="Менеджер"/>
+            <ComboBox ItemsSource="{Binding ManagersComboboxList}" SelectedItem="{Binding SelectedClient.Manager}"/>
+            <Button Command="{Binding EditCommand}" CommandParameter="{Binding SelectedClient}"> Сохранить </Button>
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -15,6 +15,7 @@ namespace SoftPlus.ViewModel
     {
         private Client client;
         private RelayCommand addCommand;
+        private RelayCommand editCommand;
 
         public List<string> ClientStatusesComboBoxList { get; set; } = new List<string>() { "Ключевой", "Обычный" };
         public List<Manager> ManagersComboboxList { get; set; }
@@ -34,14 +35,28 @@ namespace SoftPlus.ViewModel
                       ); 
             }
         }
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ?? (editCommand =
+                  new RelayCommand(
+                      obj => DataManager.EditData<Client>(obj),
+                      obj => Validator.ValideteClient(obj))
+                  );
+            }
+        }
         public Client SelectedClient
         {
             get { return client; }
             set { client = value;OnPropertyChanged("SelectedClient"); }
         }
-        public ClientViewModel()
+        public ClientViewModel(Client c = null)
         {
-            SelectedClient = new Client();
+            if(c == null)
+                SelectedClient = new Client();
+            else
+                SelectedClient = c;
             var context = new SoftPlusContext();
             ManagersComboboxList = context.Managers.ToList();
             ProductsComboboxList = context.Products.ToList();

@@ -99,7 +99,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Button Command="{Binding AddClientCommand}" >+</Button>
                     <Button Command="{Binding RemoveClientCommаnd}" CommandParameter="{Binding SelectedClient}">-</Button>
-                    <Button >edit</Button>
+                    <Button Command="{Binding EditClientCommand}" CommandParameter="{Binding SelectedClient}" >edit</Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />
@@ -147,7 +147,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Button Command="{Binding AddManagerCommand}" >+</Button>
                     <Button Command="{Binding RemoveManagerCommand}" CommandParameter="{Binding SelectedManager}">-</Button>
-                    <Button >edit</Button>
+                    <Button Command="{Binding EditManagerCommand}" CommandParameter="{Binding SelectedManager}">edit</Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />

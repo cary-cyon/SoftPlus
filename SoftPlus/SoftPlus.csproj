@@ -170,13 +170,26 @@
     <Compile Include="View\ClientAdd.xaml.cs">
       <DependentUpon>ClientAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ClientEdit.xaml.cs">
+      <DependentUpon>ClientEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManagerAdd.xaml.cs">
       <DependentUpon>ManagerAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagerEdit.xaml.cs">
+      <DependentUpon>ManagerEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductAdd.xaml.cs">
       <DependentUpon>ProductAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProductEdit.xaml.cs">
+      <DependentUpon>ProductEdit.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ClientAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ClientEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,7 +227,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ManagerEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ProductAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

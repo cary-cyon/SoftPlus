@@ -19,12 +19,16 @@ namespace SoftPlus.ViewModel
         private Product _product;
         private SoftPlusContext _dbContext;
         private RelayCommand addCommand;
+        private RelayCommand editCommand;
         public List<string> ProductTypeComboboxList { get; set; } = new List<string> { "Подписка", "Лицензия" };
         public List<string> SubscriptionPeriodComboboxList { get; set; } = new List<string> { "нет", "Месяц", "Квартал", "Год" };
-        public ProductViewModel()
+        public ProductViewModel(Product p=null)
         {
             _dbContext = new SoftPlusContext();
-            SelectedProduct = new Product();
+            if(p == null)
+                SelectedProduct = new Product();
+            else
+                SelectedProduct = p;
         }
         public RelayCommand AddCommand
         {
@@ -37,7 +41,17 @@ namespace SoftPlus.ViewModel
                     ); 
             } 
         }
-
+        public RelayCommand EditCommand
+        {
+            get
+            {
+                return editCommand ?? (editCommand =
+                    new RelayCommand(
+                            obj => DataManager.EditData<Product>(obj),
+                            obj => Validator.ValidateProduct(obj))
+                        );
+            }
+        }
         public Product SelectedProduct { get { return _product; } set { _product = value; OnPropertyChanged("SelectedProduct"); } }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

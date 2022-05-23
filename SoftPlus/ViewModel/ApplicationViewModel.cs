@@ -29,7 +29,9 @@ namespace SoftPlus.ViewModel
         private RelayCommand editCommand;
         private RelayCommand addClientCommand;
         private RelayCommand removeClientCommmand;
+        private RelayCommand editClientCommand;
         private RelayCommand addManagerCommand;
+        private RelayCommand editManagerCommand;
         private RelayCommand removeMangerCommmand;
 
         private SoftPlusContext _dbContext;
@@ -48,7 +50,7 @@ namespace SoftPlus.ViewModel
             get
             {
                 return addCommand ??
-                  (addCommand = new RelayCommand(obj => OpenWindowProduct(new ProductAdd())));
+                  (addCommand = new RelayCommand(obj => OpenWindow(new ProductAdd())));
             }
         }
         public RelayCommand RemoveCommand
@@ -68,7 +70,7 @@ namespace SoftPlus.ViewModel
             {
                 return editCommand ?? (editCommand = 
                     new RelayCommand(
-                        obj => DataManager.EditData<Product>(obj),
+                        obj => OpenWindow(new ProductEdit(obj)),
                         obj => DataManager.CanRemoveData(obj))
                     ); 
             }
@@ -78,7 +80,7 @@ namespace SoftPlus.ViewModel
             get 
             { 
                 return addClientCommand ?? (addClientCommand =
-                    new RelayCommand(obj => OpenWindowProduct(new ClientAdd()))
+                    new RelayCommand(obj => OpenWindow(new ClientAdd()))
                     );
             }
         }
@@ -93,12 +95,23 @@ namespace SoftPlus.ViewModel
                     );
             }
         }
+        public RelayCommand EditClientCommand
+        {
+            get
+            {
+                return editClientCommand ?? (editClientCommand =
+                    new RelayCommand(
+                        obj => OpenWindow(new ClientEdit(obj)),
+                        obj => DataManager.CanRemoveData(obj))
+                    );
+            }
+        }
         public RelayCommand AddManagerCommand
         {
             get
             {
                 return addManagerCommand ?? (addManagerCommand =
-                    new RelayCommand(obj => OpenWindowProduct(new ManagerAdd())));
+                    new RelayCommand(obj => OpenWindow(new ManagerAdd())));
             }
         }
         public RelayCommand RemoveManagerCommand
@@ -110,6 +123,17 @@ namespace SoftPlus.ViewModel
                         obj => DataManager.RemoveData<Manager>(obj),
                         obj => DataManager.CanRemoveData(obj))
                     );
+            }
+        }
+        public RelayCommand EditManagerCommand
+        {
+            get
+            {
+                return editManagerCommand ?? (editManagerCommand =
+                    new RelayCommand(
+                        obj => OpenWindow(new ManagerEdit(obj)),
+                        obj => DataManager.CanRemoveData(obj))
+                        );
             }
         }
         #endregion
@@ -171,7 +195,7 @@ namespace SoftPlus.ViewModel
             Update();
             
         }
-        public void OpenWindowProduct(IView view)
+        public void OpenWindow(IView view)
         {
             view.Open();
         }
