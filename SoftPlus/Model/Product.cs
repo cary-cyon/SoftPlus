@@ -31,6 +31,10 @@ namespace SoftPlus.Model
             TypeProduct = "Лицензия";
             SubscriptionPeriod = "нет";
         }
+        public override string ToString()
+        {
+            return Name;
+        }
 
     }
 }

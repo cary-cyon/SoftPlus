@@ -16,5 +16,14 @@ namespace SoftPlus.Data
                 return false;
             return true;
         }
+        public static bool ValideteClient(object obj)
+        {
+            if (obj == null)
+                return false;
+            var c = obj as Client;
+            if (c.Manager == null)
+                return false;
+            return true;
+        }
     }
 }

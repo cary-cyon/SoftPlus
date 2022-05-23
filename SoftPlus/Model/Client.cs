@@ -17,7 +17,11 @@ namespace SoftPlus.Model
             ManagerId = 2;
             StatusId = 2;
             Status = new ClientStatus();
-            
+            ClientProducts = new List<ClientProduct>();
+        }
+        public override string ToString()
+        {
+            return Name;
         }
 
     }

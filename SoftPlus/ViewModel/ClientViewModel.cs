@@ -18,13 +18,19 @@ namespace SoftPlus.ViewModel
 
         public List<string> ClientStatusesComboBoxList { get; set; } = new List<string>() { "Ключевой", "Обычный" };
         public List<Manager> ManagersComboboxList { get; set; }
+        public List<Product> ProductsComboboxList { get; set; }
+        public Product ProductComboboxListSelect{get; set;} 
         public RelayCommand AddCommand
         {
-            get 
+            get
             {
-                return addCommand ??(addCommand =
+                return addCommand ?? (addCommand =
                   new RelayCommand(
-                        obj => DataManager.AddData<Client>(obj))
+                        obj => {
+                            var c = obj as Client;
+                            DataManager.AddData<Client>(c);
+                        },
+                        obj => Validator.ValideteClient(obj))
                       ); 
             }
         }
@@ -38,6 +44,7 @@ namespace SoftPlus.ViewModel
             SelectedClient = new Client();
             var context = new SoftPlusContext();
             ManagersComboboxList = context.Managers.ToList();
+            ProductsComboboxList = context.Products.ToList();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

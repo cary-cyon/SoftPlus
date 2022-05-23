@@ -92,8 +92,9 @@ namespace SoftPlus.Data
                 c.ManagerId = c.Manager.Id;
                 c.Manager = null;
                 context.Clients.Add(c);
+
             }
-            if(type == typeof(Product))
+            if (type == typeof(Product))
             {
                 context.Products.Add(obj as Product);
             }

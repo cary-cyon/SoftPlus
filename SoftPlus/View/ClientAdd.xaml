@@ -15,8 +15,7 @@
             <ComboBox ItemsSource="{Binding ClientStatusesComboBoxList}" SelectedItem="{Binding SelectedClient.Status.Status}"/>
             <TextBlock Text="Менеджер"/>
             <ComboBox ItemsSource="{Binding ManagersComboboxList}" SelectedItem="{Binding SelectedClient.Manager}"/>
-            
-            
+
             <Button Command="{Binding AddCommand}" CommandParameter="{Binding SelectedClient}">+</Button>
 
         </StackPanel>

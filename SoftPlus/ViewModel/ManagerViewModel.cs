@@ -15,6 +15,7 @@ namespace SoftPlus.ViewModel
     {
         private Manager manager;
         private RelayCommand addCommand;
+        public List<Client> Clients { get; set; }
         public RelayCommand AddCommand
         {
             get { return addCommand ?? (addCommand = new RelayCommand(obj => DataManager.AddData<Manager>(obj))); }
@@ -28,6 +29,7 @@ namespace SoftPlus.ViewModel
         public ManagerViewModel()
         {
             SelectedManager = new Manager();
+            Clients = SelectedManager.Clients;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -26,5 +26,6 @@ namespace SoftPlus.Data
         {
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=SoftPlusDataBase;Trusted_Connection=True;");
         }
+
     }
 }

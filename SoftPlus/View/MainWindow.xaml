@@ -109,6 +109,16 @@
                     <TextBox Text="{Binding SelectedClient.Status.Status}"/>
                     <TextBlock Text="Менеджер"/>
                     <TextBox Text="{Binding SelectedClient.Manager.Name}"/>
+                    <TextBlock Text="Продукты"/>
+                    <ListBox ItemsSource="{Binding SelectedClient.ClientProducts}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="5">
+                                    <TextBlock Text="{Binding Path = Product.Name}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
 
                 </StackPanel>
             </Grid>
@@ -143,6 +153,10 @@
                     <TextBlock Text="Выбранный элемент"  />
                     <TextBlock Text="Имя"/>
                     <TextBox Text="{Binding SelectedManager.Name}"/>
+                    <ListBox ItemsSource="{Binding SelectedManager.Clients}">
+                        
+                        
+                    </ListBox>
 
                 </StackPanel>
             </Grid>
