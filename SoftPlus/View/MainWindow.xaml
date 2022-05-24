@@ -100,6 +100,7 @@
                     <Button Command="{Binding AddClientCommand}" >+</Button>
                     <Button Command="{Binding RemoveClientCommаnd}" CommandParameter="{Binding SelectedClient}">-</Button>
                     <Button Command="{Binding EditClientCommand}" CommandParameter="{Binding SelectedClient}" >edit</Button>
+                    <Button Command="{Binding AddClientProductCommand}" >++</Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />

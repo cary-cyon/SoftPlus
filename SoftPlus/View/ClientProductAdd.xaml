@@ -1,0 +1,18 @@
+﻿<Window x:Class="SoftPlus.View.ClientProductAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SoftPlus.View" xmlns:viewmodel="clr-namespace:SoftPlus.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:ClientProductViewModel}"
+        mc:Ignorable="d"
+        Title="ClientProductAdd" Height="450" Width="800">
+    <Grid>
+        <StackPanel >
+            <TextBlock Text="Продукт"/>
+            <ComboBox ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}"/>
+            <TextBlock Text="Клиент"/>
+            <ComboBox ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}"/>
+            <Button Command="{Binding AddClientProductCommand}" CommandParameter="{Binding SelectedClientProduct}">+</Button>
+        </StackPanel>
+    </Grid>
+</Window>

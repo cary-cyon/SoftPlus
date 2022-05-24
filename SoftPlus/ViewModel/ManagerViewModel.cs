@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SoftPlus.ViewModel
 {
-    internal class ManagerViewModel : INotifyPropertyChanged
+    internal class ManagerViewModel : BaseViewModel
     {
         private Manager manager;
         private RelayCommand addCommand;
@@ -44,12 +44,6 @@ namespace SoftPlus.ViewModel
             else
                 SelectedManager = m;
             Clients = SelectedManager.Clients;
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

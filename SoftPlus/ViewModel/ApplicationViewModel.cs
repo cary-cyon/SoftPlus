@@ -17,7 +17,7 @@ using System.Windows.Data;
 
 namespace SoftPlus.ViewModel
 {
-    internal class ApplicationViewModel : INotifyPropertyChanged
+    internal class ApplicationViewModel : BaseViewModel
     {
         
         private Product selectedProduct;
@@ -33,7 +33,7 @@ namespace SoftPlus.ViewModel
         private RelayCommand addManagerCommand;
         private RelayCommand editManagerCommand;
         private RelayCommand removeMangerCommmand;
-
+        private RelayCommand addClientProductCommand;
         private SoftPlusContext _dbContext;
         private List<Product> products;
         private List<Client> clients;
@@ -136,6 +136,19 @@ namespace SoftPlus.ViewModel
                         );
             }
         }
+        public RelayCommand AddClientProductCommand
+        {
+            get
+            {
+                return addClientProductCommand ?? (addClientProductCommand =
+                    new RelayCommand(
+                        obj =>
+                        {
+                            OpenWindow(new ClientProductAdd());
+                        }
+                        ));
+            }
+        }
         #endregion
         public List<Product> Products
         {
@@ -199,12 +212,7 @@ namespace SoftPlus.ViewModel
         {
             view.Open();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
+
         public static ApplicationViewModel getInstance()
         {
             if (_instance == null)

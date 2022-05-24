@@ -14,7 +14,7 @@ using System.Windows.Data;
 
 namespace SoftPlus.ViewModel
 {
-    internal class ProductViewModel : INotifyPropertyChanged
+    internal class ProductViewModel : BaseViewModel
     {
         private Product _product;
         private SoftPlusContext _dbContext;
@@ -53,11 +53,5 @@ namespace SoftPlus.ViewModel
             }
         }
         public Product SelectedProduct { get { return _product; } set { _product = value; OnPropertyChanged("SelectedProduct"); } }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

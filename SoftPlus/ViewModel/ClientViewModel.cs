@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SoftPlus.ViewModel
 {
-    internal class ClientViewModel : INotifyPropertyChanged
+    internal class ClientViewModel : BaseViewModel
     {
         private Client client;
         private RelayCommand addCommand;
@@ -60,12 +60,6 @@ namespace SoftPlus.ViewModel
             var context = new SoftPlusContext();
             ManagersComboboxList = context.Managers.ToList();
             ProductsComboboxList = context.Products.ToList();
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
