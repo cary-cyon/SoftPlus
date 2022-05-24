@@ -53,13 +53,13 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />
                     <TextBlock Text="Название" />
-                    <TextBox Text="{Binding SelectedProduct.Name}" />
+                    <TextBlock Text="{Binding SelectedProduct.Name}" />
                     <TextBlock Text="Тип" />
-                    <ComboBox ItemsSource="{Binding ProductTypeComboboxList}" SelectedItem="{Binding SelectedProduct.TypeProduct}"/>
+                    <TextBlock Text="{Binding SelectedProduct.TypeProduct}"/>
                     <TextBlock Text="Цена" />
                     <TextBox Text="{Binding SelectedProduct.Price}" />
                     <TextBlock Text="Период подписки" />
-                    <ComboBox ItemsSource="{Binding SubscriptionPeriodComboboxList}" SelectedItem="{Binding SelectedProduct.SubscriptionPeriod}"/>
+                    <TextBlock Text="{Binding SelectedProduct.SubscriptionPeriod}"/>
                     <TextBlock Text="Клиенты" />
                     <ListBox ItemsSource="{Binding SelectedProduct.ClientProducts}">
                         <ListBox.ItemTemplate>
@@ -105,11 +105,11 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />
                     <TextBlock Text="Имя"/>
-                    <TextBox Text="{Binding SelectedClient.Name}"/>
+                    <TextBlock Text="{Binding SelectedClient.Name}"/>
                     <TextBlock Text="Статус"/>
-                    <TextBox Text="{Binding SelectedClient.Status.Status}"/>
+                    <TextBlock Text="{Binding SelectedClient.Status.Status}"/>
                     <TextBlock Text="Менеджер"/>
-                    <TextBox Text="{Binding SelectedClient.Manager.Name}"/>
+                    <TextBlock Text="{Binding SelectedClient.Manager.Name}"/>
                     <TextBlock Text="Продукты"/>
                     <ListBox ItemsSource="{Binding SelectedClient.ClientProducts}">
                         <ListBox.ItemTemplate>
@@ -153,7 +153,7 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="Выбранный элемент"  />
                     <TextBlock Text="Имя"/>
-                    <TextBox Text="{Binding SelectedManager.Name}"/>
+                    <TextBlock Text="{Binding SelectedManager.Name}"/>
                     <ListBox ItemsSource="{Binding SelectedManager.Clients}">
                         
                         

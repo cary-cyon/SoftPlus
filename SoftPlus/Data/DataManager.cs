@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SoftPlus.Model;
+﻿using SoftPlus.Model;
 using SoftPlus.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftPlus.Data
 {

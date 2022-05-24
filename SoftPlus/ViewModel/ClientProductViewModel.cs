@@ -1,11 +1,8 @@
 ﻿using SoftPlus.Command;
 using SoftPlus.Data;
 using SoftPlus.Model;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SoftPlus.ViewModel
 {
