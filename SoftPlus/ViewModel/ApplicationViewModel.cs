@@ -52,7 +52,7 @@ namespace SoftPlus.ViewModel
             {
                 return removeCommand ?? (removeCommand = 
                     new RelayCommand(
-                        obj => DataManager.RemoveData<Product>(obj),
+                        async obj =>await DataManager.RemoveData<Product>(obj),
                         obj => DataManager.CanRemoveData(obj))
                     );
             }
@@ -83,7 +83,7 @@ namespace SoftPlus.ViewModel
             {
                 return removeClientCommmand ?? (removeClientCommmand = 
                     new RelayCommand(
-                        obj => DataManager.RemoveData<Client>(obj),
+                        async obj => await DataManager.RemoveData<Client>(obj),
                         obj => DataManager.CanRemoveData(obj))
                     );
             }
@@ -113,7 +113,7 @@ namespace SoftPlus.ViewModel
             {
                 return removeMangerCommmand ?? (removeMangerCommmand = 
                     new RelayCommand(
-                        obj => DataManager.RemoveData<Manager>(obj),
+                        async obj => await DataManager.RemoveData<Manager>(obj),
                         obj => DataManager.CanRemoveData(obj))
                     );
             }

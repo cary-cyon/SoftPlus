@@ -25,12 +25,12 @@ namespace SoftPlus.Data
             }
 
         }
-        public static string RemoveData<ModelType>(object obj)
+        public static async Task<string> RemoveData<ModelType>(object obj)
         {
             try
             {
                 var db = new SoftPlusContext();
-                RemoveFromDbSet(typeof(ModelType), db, obj);
+                await RemoveFromDbSet(typeof(ModelType), db, obj);
                 var app = ApplicationViewModel.getInstance();
                 app.Update();
                 return "Ок";
@@ -101,7 +101,7 @@ namespace SoftPlus.Data
             }
             await context.SaveChangesAsync();
         }
-        private static void RemoveFromDbSet(Type type, SoftPlusContext context, object obj)
+        private static async Task RemoveFromDbSet(Type type, SoftPlusContext context, object obj)
         {
             if (type == typeof(Client))
             {
@@ -118,7 +118,7 @@ namespace SoftPlus.Data
                 Manager cl = obj as Manager;
                 context.Managers.Remove(cl);
             }
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
         }
         private static void EditInDataSet(Type type, SoftPlusContext context, object obj)
