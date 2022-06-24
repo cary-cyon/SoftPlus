@@ -47,7 +47,7 @@ namespace SoftPlus.ViewModel
             {
                 return editCommand ?? (editCommand =
                     new RelayCommand(
-                            obj => DataManager.EditData<Product>(obj),
+                            async obj =>await DataManager.EditData<Product>(obj),
                             obj => Validator.ValidateProduct(obj))
                         );
             }

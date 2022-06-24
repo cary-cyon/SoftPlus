@@ -33,7 +33,7 @@ namespace SoftPlus.ViewModel
             {
                 return editCommand ?? (editCommand = 
                     new RelayCommand(
-                        obj => DataManager.EditData<Manager>(obj))
+                        async obj =>await DataManager.EditData<Manager>(obj))
                     );
             }
         }
