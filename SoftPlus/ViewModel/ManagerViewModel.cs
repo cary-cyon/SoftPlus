@@ -19,7 +19,7 @@ namespace SoftPlus.ViewModel
         public List<Client> Clients { get; set; }
         public RelayCommand AddCommand
         {
-            get { return addCommand ?? (addCommand = new RelayCommand(obj => DataManager.AddData<Manager>(obj))); }
+            get { return addCommand ?? (addCommand = new RelayCommand(async obj =>await DataManager.AddData<Manager>(obj))); }
         }
         public Manager SelectedManager
         {

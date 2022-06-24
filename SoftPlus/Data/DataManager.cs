@@ -2,18 +2,19 @@
 using SoftPlus.ViewModel;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SoftPlus.Data
 {
     internal class DataManager
     {
 
-        public static string AddData<ModelType>(object obj) where ModelType : class
+        public static async Task<string> AddData<ModelType>(object obj) where ModelType : class
         {
             try
             {
                 var db = new SoftPlusContext();
-                AddToDbSet(typeof(ModelType), db, obj);
+                await AddToDbSet(typeof(ModelType), db, obj);
                 ApplicationViewModel app = ApplicationViewModel.getInstance();
                 app.Update();
                 return "Ok";
@@ -78,7 +79,7 @@ namespace SoftPlus.Data
             return obj != null ? true : false;
         }
 
-        private static void AddToDbSet(Type type, SoftPlusContext context, object obj)
+        private static async Task AddToDbSet(Type type, SoftPlusContext context, object obj)
         {
             if(type == typeof(Client))
             {
@@ -87,18 +88,18 @@ namespace SoftPlus.Data
                     c.StatusId = 1;
                 c.ManagerId = c.Manager.Id;
                 c.Manager = null;
-                context.Clients.Add(c);
+                await context.Clients.AddAsync(c);
 
             }
             if (type == typeof(Product))
             {
-                context.Products.Add(obj as Product);
+                await context.Products.AddAsync(obj as Product);
             }
             if(type == typeof(Manager))
             {
-                context.Managers.Add(obj as Manager);
+                await context.Managers.AddAsync(obj as Manager);
             }
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
         private static void RemoveFromDbSet(Type type, SoftPlusContext context, object obj)
         {
